@@ -19,12 +19,10 @@ User.hasMany(Address, {
 Address.belongsTo(User); //address想反查user必须加这个，否则只能实现user查询address
 
 User.belongsToMany(Role, {
-    through: "userRoles",
-    as: "UserRoles"
+    through: "userRoles"
 });
 Role.belongsToMany(User, {
-    through: 'userRoles',
-    as: 'UserRoles'
+    through: 'userRoles'
 });
 
 //创建表
