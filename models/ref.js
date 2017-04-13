@@ -1,3 +1,6 @@
+/**
+ * 模型关联类
+ */
 var { sequelize } = require("../config/db");
 var User = sequelize.import("./user");
 var LoginInfo = sequelize.import("./loginInfo");
@@ -13,6 +16,7 @@ User.hasMany(Address, {
     targetKey: 'id',
     as: "Addresses" //别名，目标模型会混入到源模型后会使用该名称,存在getAddresses、setAddresses等方法
 });
+Address.belongsTo(User); //address想反查user必须加这个，否则只能实现user查询address
 
 User.belongsToMany(Role, {
     through: "userRoles",

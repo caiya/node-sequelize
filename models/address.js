@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         userId: {
             type: DataTypes.INTEGER,
             field: "user_id",
-            allowNull: false,
             comment: "用户id",
             references: { //引用user模型里的id属性，即在loginInfo表中添加user_id逻辑关联
                 model: "user",
