@@ -50,8 +50,8 @@ const classMethods = {
         return this.findById(id);
     },
     //获取所有
-    getUsers: function() {
-        return this.findAll();
+    getUsers: function(options) {
+        return this.findAll(options);
     },
     //根据id更新数据
     updateUserById: function(values, id) {

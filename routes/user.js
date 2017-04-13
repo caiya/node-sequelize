@@ -5,6 +5,7 @@ var { sequelize } = require("../config/db");
 
 var User = sequelize.import("../models/user");
 var Address = sequelize.import("../models/address");
+var LoginInfo = sequelize.import("../models/loginInfo");
 
 /**
  * 获取单个用户
@@ -22,7 +23,10 @@ router.get('/:id', function(req, res, next) {
  * 获取所有用户
  */
 router.get('/', function(req, res, next) {
-    User.getUsers().then(function(result) {
+    User.getUsers({
+        limit: parseInt(req.query.limit) || 10, //默认查询10条
+        offset: parseInt(req.query.offset) || 0 //默认查询第一页
+    }).then(function(result) {
         res.json({
             status: 1,
             data: result
@@ -71,16 +75,34 @@ router.get('/:id/del', function(req, res, next) {
  * 查找某个用户的所有地址
  */
 router.get("/:id/addresses", function(req, res, next) {
-    User.findOne({
-        where: {
-            id: req.params.id
-        }
-    }).then(function(user) {
-        return user.getAddresses();
+    var user = User.build({
+        id: req.params.id
+    });
+    user.getAddresses({
+        // limit: 1,
+        // offset: 1
+        order: "id desc" //按照id倒排
     }).then(function(addresses) {
         res.json({
             status: 1,
             data: addresses
+        });
+    }).catch(next);
+});
+
+/**
+ * 查询某个用户的登录信息
+ */
+router.get("/:id/logininfo", function(req, res, next) {
+    User.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [LoginInfo]
+    }).then(function(user) {
+        res.json({
+            status: 1,
+            data: user
         });
     }).catch(next);
 });
