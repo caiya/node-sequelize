@@ -12,7 +12,10 @@ var LoginInfo = sequelize.import("../models/loginInfo");
  */
 router.get("/", function(req, res, next) {
     Address.findAll({
-        include: [User]
+        include: [{
+            model: User,
+            as: "user_id"
+        }]
     }).then(function(addresses) {
         res.json({
             status: 1,

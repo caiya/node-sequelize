@@ -98,7 +98,9 @@ router.get("/:id/logininfo", function(req, res, next) {
         where: {
             id: req.params.id
         },
-        include: [LoginInfo]
+        include: {
+            model: LoginInfo
+        }
     }).then(function(user) {
         res.json({
             status: 1,
