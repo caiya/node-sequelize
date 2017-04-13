@@ -1,11 +1,10 @@
-// 将设置放入此文件中以覆盖默认设置
-{
-    "editor.fontSize": 17,
-    "workbench.iconTheme": "vscode-icons",
-    "editor.fontFamily": "Source Code Pro, 'Courier New', monospace",
-    "git.confirmSync": false
-}
-ar Address = sequelize.import("../models/address");
+var express = require('express');
+var router = express.Router();
+
+var { sequelize } = require("../config/db");
+
+var User = sequelize.import("../models/user");
+var Address = sequelize.import("../models/address");
 var LoginInfo = sequelize.import("../models/loginInfo");
 
 /**
