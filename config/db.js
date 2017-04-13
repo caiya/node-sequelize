@@ -19,3 +19,4 @@ sequelize.authenticate().then(function() {
 });
 
 exports.sequelize = sequelize;
+exports.Sequelize = Sequelize;
