@@ -92,7 +92,7 @@ router.get("/:id/addresses", function(req, res, next) {
 });
 
 /**
- * 查询某个用户的登录信息（测试提交）
+ * 查询某个用户的登录信息
  */
 router.get("/:id/logininfo", function(req, res, next) {
     User.findOne({
