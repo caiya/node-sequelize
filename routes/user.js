@@ -72,7 +72,7 @@ router.get('/:id/del', function(req, res, next) {
 });
 
 /**
- * 查找某个用户的所有地址
+ * 查找用户的所有地址
  */
 router.get("/:id/addresses", function(req, res, next) {
     var user = User.build({
@@ -91,7 +91,7 @@ router.get("/:id/addresses", function(req, res, next) {
 });
 
 /**
- * 查询某个用户的登录信息
+ * 查询用户的登录信息
  */
 router.get("/:id/logininfo", function(req, res, next) {
     User.findOne({
@@ -103,6 +103,23 @@ router.get("/:id/logininfo", function(req, res, next) {
         res.json({
             status: 1,
             data: user
+        });
+    }).catch(next);
+});
+
+/**
+ * 查询当前用户所有的角色
+ */
+router.get("/:id/roles", function(req, res, next) {
+    var user = User.build({
+        id: req.params.id
+    });
+    user.getUserRoles({
+        order: "id desc"
+    }).then(function(userRoles) {
+        res.json({
+            status: 1,
+            data: userRoles
         });
     }).catch(next);
 });
