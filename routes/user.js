@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
-
-var { sequelize } = require("../config/db");
-
-var User = sequelize.import("../models/user");
-var Address = sequelize.import("../models/address");
+// 将设置放入此文件中以覆盖默认设置
+{
+    "editor.fontSize": 17,
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontFamily": "Source Code Pro, 'Courier New', monospace",
+    "git.confirmSync": false
+}
+ar Address = sequelize.import("../models/address");
 var LoginInfo = sequelize.import("../models/loginInfo");
 
 /**
@@ -91,7 +92,7 @@ router.get("/:id/addresses", function(req, res, next) {
 });
 
 /**
- * 查询某个用户的登录信息
+ * 查询某个用户的登录信息（测试提交）
  */
 router.get("/:id/logininfo", function(req, res, next) {
     User.findOne({
