@@ -38,8 +38,11 @@ router.get('/', function(req, res, next) {
  * 新增
  */
 router.post('/', function(req, res, next) {
-    var user = User.build(req.body);
-    user.save().then(function(result) {
+    User.create(req.body).then(function(user) {
+        return user.createRole({
+            roleName: req.body.roleName
+        });
+    }).then(function(result) {
         res.json({
             status: 1,
             data: result
